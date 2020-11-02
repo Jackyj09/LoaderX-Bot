@@ -137,16 +137,16 @@ class MirrorListener(listeners.MirrorListeners):
 
     def onUploadComplete(self, link: str):
         with download_dict_lock:
-            msg = f'<b>Filename : </b><code>{download_dict[self.uid].name()}</code>\n<b>Size : </b><code>{download_dict[self.uid].size()}</code>'
+            msg = f'<u>𝗣𝗼𝘄𝗲𝗿𝗲𝗱 𝗕𝘆</u> <a href="https://t.me/premiumcoursesdrive">📚 Courses Drive 📚</a>\n\n𝗙𝗶𝗹𝗲𝗻𝗮𝗺𝗲🗂 : <code>{download_dict[self.uid].name()}</code>\n𝗦𝗶𝘇𝗲 ⚖️ : <code>{download_dict[self.uid].size()}</code>\n\nOnly Use TeamDrive Link if you have Access.\nDon\'t request access through this link'
             buttons = button_builder.ButtonMaker()
-            buttons.buildbutton("⚡Drive Link⚡", link)
+            buttons.buildbutton("📚 Course Link 📚", link)
             LOGGER.info(f'Done Uploading {download_dict[self.uid].name()}')
             if INDEX_URL is not None:
                 url_path = requests.utils.quote(f'{download_dict[self.uid].name()}')
                 share_url = f'{INDEX_URL}/{url_path}'
                 if os.path.isdir(f'{DOWNLOAD_DIR}/{self.uid}/{download_dict[self.uid].name()}'):
                     share_url += '/'
-                buttons.buildbutton("💥Index Link💥", share_url)
+                buttons.buildbutton("Index Link", share_url)
             if self.message.from_user.username:
                 uname = f"@{self.message.from_user.username}"
             else:
@@ -214,7 +214,7 @@ def _mirror(bot, update, isTar=False, extract=False):
     else:
         tag = None
     if not bot_utils.is_url(link) and not bot_utils.is_magnet(link):
-        sendMessage('No download source provided', bot, update)
+        sendMessage('🤦‍♂ No download source provided 😝', bot, update)
         return
 
     try:
